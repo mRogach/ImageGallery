@@ -18,10 +18,11 @@ import java.util.ArrayList;
 public class ViewPagerFragment extends Fragment {
     private ViewPager viewPager;
     private ArrayList <Image> list;
+    private int position;
 
-    public static ViewPagerFragment newInstance(ArrayList<Image> list) {
+    public static ViewPagerFragment newInstance(int position) {
         Bundle args = new Bundle();
-        args.putSerializable("image", list);
+        args.putInt("image", position);
         ViewPagerFragment countryDetailFragment = new ViewPagerFragment();
         countryDetailFragment.setArguments(args);
         return countryDetailFragment;
@@ -31,9 +32,9 @@ public class ViewPagerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        list = new ArrayList<Image>();
-        list = (ArrayList<Image>) getArguments().getSerializable("image");
-
+        //list = ImageList.get(getActivity()).getImages();
+        //list = (ArrayList<Image>) getArguments().getSerializable("image");
+        position = getArguments().getInt("image");
     }
 
     @Override
@@ -44,14 +45,16 @@ public class ViewPagerFragment extends Fragment {
         viewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
             @Override
             public int getCount() {
-                return list.size();
+                return ImageList.get(getActivity()).getImages().size();
             }
             @Override
             public Fragment getItem(int pos) {
-                Image image = list.get(pos);
+                Image image = ImageList.get(getActivity()).getImages().get(pos);
                 return ImageFragment.newInstance(image.getmUrl());
             }
         });
+
+        viewPager.setCurrentItem(position);
         return view;
     }
 

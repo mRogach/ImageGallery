@@ -23,12 +23,17 @@ public class RecyclerFragment extends Fragment {
     private RecyclerView recyclerView;
     private int columnCount;
     private MyRecyclerAdapter adapter;
+    private ArrayList<Image> mImages;
+    private ImageList mImageList;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         columnCount = 2;
+        mImageList.get(getActivity()).setImages(createList());
+        mImages = mImageList.get(getActivity()).getImages();
     }
 
     @Override
@@ -38,14 +43,14 @@ public class RecyclerFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL));
         new StaggeredGridLayoutManager.LayoutParams(5, 10);
-        adapter = new MyRecyclerAdapter(createList(), R.layout.item);
+        adapter = new MyRecyclerAdapter(mImages, R.layout.item);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        final Fragment fragment = ViewPagerFragment.newInstance(createList());
+                        final Fragment fragment = ViewPagerFragment.newInstance(position);;
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.fragmentContainer, fragment);
                         ft.addToBackStack("tag");
@@ -71,4 +76,6 @@ public class RecyclerFragment extends Fragment {
         }
         return items;
     }
-}
+
+
+    }

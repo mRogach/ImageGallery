@@ -27,7 +27,7 @@ public class ImageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        url = getArguments().getString("image");
+        url = getArguments().getString("url");
     }
 
     @Override
