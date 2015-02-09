@@ -42,7 +42,7 @@ public class RecyclerFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL));
-        new StaggeredGridLayoutManager.LayoutParams(5, 10);
+        new StaggeredGridLayoutManager.LayoutParams(5, 5);
         adapter = new MyRecyclerAdapter(mImages, R.layout.item);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -65,7 +65,7 @@ public class RecyclerFragment extends Fragment {
     private ArrayList<Image> createList() {
         final ArrayList<Image> items = new ArrayList<Image>();
         for (int i = 0; i < 30; i++) {
-            new DownloadImageTask(new MyCallBack() {
+            new DownloadImageUrlTask(new MyCallBack() {
                 @Override
                 public void callBack(String c) {
                     items.add(new Image(c));

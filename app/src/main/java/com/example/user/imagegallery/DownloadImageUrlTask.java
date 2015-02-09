@@ -13,13 +13,13 @@ import java.net.URL;
 /**
  * Created by User on 03.02.2015.
  */
-public class DownloadImageTask extends AsyncTask<String, Void, String> {
+public class DownloadImageUrlTask extends AsyncTask<String, Void, String> {
 
     private String message = null;
     private String imageUrl;
     private MyCallBack myCallBack;
 
-    public DownloadImageTask(MyCallBack myCallBack) {
+    public DownloadImageUrlTask(MyCallBack myCallBack) {
     this.myCallBack = myCallBack;
     }
 

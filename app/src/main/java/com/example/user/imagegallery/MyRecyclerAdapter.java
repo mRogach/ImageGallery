@@ -37,6 +37,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         Picasso.with(holder.image.getContext())
                 .load(item.getmUrl())
                 .into(holder.image);
+        //new LoadImageFromUrlTask(holder.image.getContext(), holder.image).execute(item.getmUrl());
         holder.itemView.setTag(item);
     }
 
